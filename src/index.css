@@ -22,7 +22,7 @@ code {
     align-items: center;
 }
 
-header.MuiPaper-root.MuiAppBar-root.MuiAppBar-positionStatic.MuiAppBar-colorTransparent.MuiPaper-elevation4 {
+header.MuiPaper-root.MuiAppBar-root.MuiAppBar-positionStatic.MuiPaper-elevation4 {
   position: fixed;
 }
 
@@ -33,4 +33,84 @@ header.MuiPaper-root.MuiAppBar-root.MuiAppBar-positionStatic.MuiAppBar-colorTran
 nav.MuiPagination-root {
   float: right;
   margin-top: 30px;
+}
+
+header.MuiPaper-root.MuiAppBar-root.MuiAppBar-positionStatic.MuiAppBar-colorPrimary.MuiPaper-elevation4 {
+  background-color: white;
+}
+
+table {
+  font-size: small;
+}
+
+thead {
+  background-color: aliceblue;
+  color: grey;
+}
+
+.container.grid{
+  border: #0000001f solid 1px;
+}
+
+td, th {
+  padding: 15px 21px;
+}
+
+span.new.badge {
+  font-weight: 500;
+  border-radius: 14px;
+}
+
+span.new.badge.failed {
+  background-color: #efc6c6;
+  color: #880606;
+}
+
+span.new.badge.success {
+  background-color: #94ce94;
+  color: darkgreen;
+}
+
+span.new.badge.upcoming {
+  background-color: #eac073;
+  color: #964311;
+}
+
+.filters__calender {
+  float: left;
+}
+
+.filters__calender{
+  float: right;
+}
+
+.filters {
+  margin-bottom: 50px;
+  font-weight: 400;
+  font-size: medium;
+}
+
+nav {
+  background-color: white;
+}
+
+ul.MuiPagination-ul {
+  float: right;
+}
+
+.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-small, .btn-floating, .dropdown-content, .collapsible, .sidenav {
+  box-shadow: none;
+}
+
+.loader {
+  position: absolute;
+  right: 50%;
+}
+
+.preloader-wrapper.big {
+  width: 64px;
+  height: 64px;
+  margin-left: 300%;
+  margin-top: 90%;
+  margin-bottom: 98%;
 }
