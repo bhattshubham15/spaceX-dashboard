@@ -21,7 +21,7 @@ class Navbar extends Component {
         const { classes } = this.props;
         return (
             <div className={classes.root}>
-                <AppBar position="static" color="transparent">
+                <AppBar position="static" >
                     <Toolbar>
                         <Typography variant="h6" className={classes.title}>
                             <img src={Logo} alt="spacex_logo" />
