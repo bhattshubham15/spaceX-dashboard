@@ -1,11 +1,17 @@
+import moment from 'moment';
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchLaunches } from '../Actions/Launchactions';
+import { fetchLaunchById, fetchLaunches, setModal } from '../Actions/Launchactions';
 import Loader from './Loader';
+import Modal from './Modal';
 
 class Grid extends Component {
     componentDidMount() {
         this.props.getLaunches(); // get all the launches
+    }
+    handleRowClick = (id) => {
+        this.props.fetchLaunchById(id);
+        this.props.setModal(!this.props.showModal);
     }
     render() {
         return (
@@ -20,12 +26,12 @@ class Grid extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.pageData ?
+                        {this.props.pageData.length !== 0 ?
                             this.props.pageData.map((item, index) => {
                                 return (
-                                    <tr key={index}>
+                                    <tr key={index} className="grid__row-data" onClick={() => this.handleRowClick(item.id)}>
                                         <td>{(item.flight_number).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false })}</td>
-                                        <td>{item.date_utc}</td>
+                                        <td>{moment.utc(item.date_utc).local().format('D MMMM YYYY, LT')}</td>
                                         <td>{item.name}</td>
                                         <td>{item.upcoming === true ? <span className="new badge upcoming" data-badge-caption="Upcoming" /> : (item.success === true ? <span className="new badge success" data-badge-caption="Success" /> : <span className="new badge failed" data-badge-caption="Failed" />)}</td>
                                     </tr>
@@ -38,6 +44,9 @@ class Grid extends Component {
                                 </td>
                             </tr>
                         }
+                        <tr>
+                            <Modal />
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -49,12 +58,16 @@ const mapStateToProps = (data) => {
     return {
         data: data && data.data,
         pageData: data && data.pageData,
+        showModal: data && data.showModal,
+        modalData: data && data.modalData,
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         getLaunches: () => dispatch(fetchLaunches),
+        setModal: (check) => dispatch(setModal(check)),
+        fetchLaunchById: (id) => dispatch(fetchLaunchById(id)),
     };
 }
 
