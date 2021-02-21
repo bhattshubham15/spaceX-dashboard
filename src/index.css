@@ -77,10 +77,12 @@ span.new.badge.upcoming {
 }
 
 .filters__calender {
+  cursor: pointer;
   float: left;
 }
 
-.filters__calender{
+.filters__launches{
+  cursor: pointer;
   float: right;
 }
 
@@ -113,4 +115,25 @@ ul.MuiPagination-ul {
   margin-left: 300%;
   margin-top: 90%;
   margin-bottom: 98%;
+}
+
+tr.grid__row-data {
+  cursor: pointer;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.grid-item.image {
+  grid-row: 1 / 4;
+}
+
+.MuiListItemText-root {
+  padding: inherit;
 }
