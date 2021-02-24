@@ -137,3 +137,18 @@ tr.grid__row-data {
 .MuiListItemText-root {
   padding: inherit;
 }
+
+.calendarfilter__parent {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr;
+  grid-template-rows: 1fr;
+  grid-gap: 10px;
+}
+
+.calendarfilter__calendaroptions {
+  cursor: pointer;
+}
+
+.calendarfilter__calendaroptions:hover {
+  background-color: rgb(168, 163, 157);
+}

@@ -34,21 +34,21 @@ class Modal extends Component {
                         <div className="row">
                             <div className="left grid-container">
                                 <div className="grid-item image">
-                                    <ImageAvatars launchImage={modalData.links.patch.small} />
+                                    <ImageAvatars launchImage={modalData.links.mission_patch_small} />
                                 </div>
                                 <div className="grid-item">
-                                    <h5>{modalData.name}</h5>
+                                    <h5>{modalData.mission_name}</h5>
                                 </div>
                                 <div className="grid-item">
                                     <p>
-                                        {modalData.upcoming === true ? <span className="new badge upcoming" data-badge-caption="Upcoming" /> : (modalData.success === true ? <span className="new badge success" data-badge-caption="Success" /> : <span className="new badge failed" data-badge-caption="Failed" />)}
+                                        {modalData.upcoming === true ? <span className="new badge upcoming" data-badge-caption="Upcoming" /> : (modalData.launch_success === true ? <span className="new badge success" data-badge-caption="Success" /> : <span className="new badge failed" data-badge-caption="Failed" />)}
                                     </p>
                                 </div>
                                 <div className="grid-item">
-                                    <a href={modalData.links.article} target="blank">
+                                    <a href={modalData.links.article_link} target="blank">
                                         <PublicIcon />
                                     </a>
-                                    <a href={modalData.links.webcast} target="blank">
+                                    <a href={modalData.links.video_link} target="blank">
                                         <YouTubeIcon />
                                     </a>
                                 </div>
@@ -74,12 +74,12 @@ class Modal extends Component {
                                 <Divider />
                                 <ListItem>
                                     <ListItemText primary={"Mission Name"} />
-                                    <ListItemText primary={modalData.name} />
+                                    <ListItemText primary={modalData.mission_name} />
                                 </ListItem>
                                 <Divider />
                                 <ListItem>
                                     <ListItemText primary={"Launch Date"} />
-                                    <ListItemText primary={moment.utc(modalData.date_utc).local().format('D MMMM YYYY, LT')} />
+                                    <ListItemText primary={moment.utc(modalData.launch_date_utc).local().format('D MMMM YYYY, LT')} />
                                 </ListItem>
                             </List>
                         </DialogContent>

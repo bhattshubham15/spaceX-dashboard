@@ -1,4 +1,4 @@
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Filters from './Components/Filters';
 import Grid from './Components/Grid';
@@ -11,7 +11,9 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Filters />
-        <Grid />
+        <Switch>
+          <Route exact path="/" component={Grid} />
+        </Switch>
         <PaginationRounded />
       </BrowserRouter>
     </div>
