@@ -62,6 +62,9 @@ class Calendarfilter extends Component {
                 break;
         }
         if (e.target.id == "Select") {
+            this.setState({
+                calOption: e.target.id,
+            })
             let queryParams = new URLSearchParams(window.location.search);
             queryParams.delete("start");
             queryParams.delete("end");
