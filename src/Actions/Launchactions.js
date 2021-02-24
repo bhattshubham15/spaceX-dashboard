@@ -69,14 +69,14 @@ export function setModal(showModal) {
 /**
  * Filter data on the basis of launch status
  */
-export function filterByLaunchStatus(value, stateData, originalData) {
+export function filterByLaunchStatus(value, originalData = []) {
     let newStateData = originalData.filter((item) => {
         if (value === 'upcoming-launches') {
             return item.upcoming === true;
         } else if (value === 'successful-launches') {
-            return item.success === true;
+            return item.launch_success === true;
         } else if (value === 'failed-launches') {
-            return item.success === false;
+            return item.launch_success === false;
         } else {
             return item;
         }
@@ -84,6 +84,40 @@ export function filterByLaunchStatus(value, stateData, originalData) {
     const pageData = paginateData(newStateData, 1);
     const totalPaginations = Math.ceil(newStateData.length / 10);
     return function (dispatch) {
-        dispatch({ type: LAUNCH_STATUS_FILTER , newStateData, pageData, totalPaginations});
+        dispatch({ type: LAUNCH_STATUS_FILTER, newStateData, pageData, totalPaginations, launchFilter: value });
+    }
+}
+/**
+ * Get all the launches by date filter
+ */
+export function filterByDate(fromDate, toDate) {
+    return function (dispatch) {
+        return axios.get(constants.BASE_URL + constants.ALL_LAUNCHES, { params: { start: fromDate, end: toDate } })
+            .then((response) => {
+                if (response.status === 200) {
+                    const pageData = paginateData(response.data, 1);
+                    const totalPaginations = Math.ceil(response.data.length / 10);
+                    dispatch(getSuccessfullLaunches(response, pageData, totalPaginations, fromDate, toDate));
+                }
+            })
+            .catch((error) => {
+                dispatch(catchError(error));
+            })
+    }
+}
+/**
+ * Get successfull launch by date
+ */
+export function getSuccessfullLaunches(response, pageData, totalPaginations, fromDate, toDate) {
+    return {
+        type: LAUNCHES_FETCHED, payload: response.data, pageData, totalPaginations, fromDate, toDate
+    }
+}
+/**
+ * Catch failure
+ */
+export function catchError(error) {
+    return {
+        type: LAUNCHES_FETCH_ERROR, payload: error
     }
 }

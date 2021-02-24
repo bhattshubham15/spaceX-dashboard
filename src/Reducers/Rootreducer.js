@@ -13,6 +13,9 @@ const initialState = {
     pageData: '',
     totalPaginations: 10,
     showModal: false,
+    filterLaunchType: '',
+    filterStartDate: '',
+    filterEndDate: '',
     modalData: '',
     error: '',
 };
@@ -22,10 +25,12 @@ export const rootReducer = (state = initialState, action) => {
         case LAUNCHES_FETCHED:
             return {
                 ...state,
-                originalData: action.payload, 
+                originalData: action.payload,
                 data: action.payload,
                 pageData: action.pageData,
                 totalPaginations: action.totalPaginations,
+                filterStartDate: action.fromDate ? action.fromDate : '',
+                filterEndDate: action.toDate ? action.toDate : '',
             }
         case LAUNCHES_FETCH_ERROR:
             return {
@@ -54,6 +59,7 @@ export const rootReducer = (state = initialState, action) => {
                 data: action.newStateData,
                 pageData: action.pageData,
                 totalPaginations: action.totalPaginations,
+                filterLaunchType: action.launchFilter,
             }
         default: return state;
     }
