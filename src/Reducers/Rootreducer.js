@@ -8,7 +8,7 @@ import {
 } from "../Types";
 
 const initialState = {
-    originalData: '',
+    originalData: [],
     data: '',
     pageData: '',
     totalPaginations: 10,
@@ -17,6 +17,7 @@ const initialState = {
     filterStartDate: '',
     filterEndDate: '',
     modalData: '',
+    noDataFound: false,
     error: '',
 };
 
@@ -31,6 +32,7 @@ export const rootReducer = (state = initialState, action) => {
                 totalPaginations: action.totalPaginations,
                 filterStartDate: action.fromDate ? action.fromDate : '',
                 filterEndDate: action.toDate ? action.toDate : '',
+                noDataFound: action.noDataFound,
             }
         case LAUNCHES_FETCH_ERROR:
             return {
@@ -60,6 +62,7 @@ export const rootReducer = (state = initialState, action) => {
                 pageData: action.pageData,
                 totalPaginations: action.totalPaginations,
                 filterLaunchType: action.launchFilter,
+                noDataFound: action.noDataFound,
             }
         default: return state;
     }
