@@ -41,7 +41,7 @@ class Grid extends Component {
                                 return (
                                     <tr key={index} className="grid__row-data" onClick={() => this.handleRowClick(item.flight_number)}>
                                         <td>{(item.flight_number).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false })}</td>
-                                        <td>{moment.utc(item.date_utc).local().format('D MMMM YYYY, LT')}</td>
+                                        <td>{moment.utc(item.launch_date_utc).local().format('D MMMM YYYY, LT')}</td>
                                         <td>{item.launch_site.site_name}</td>
                                         <td>{item.mission_name}</td>
                                         <td>{item.rocket.second_stage.payloads[0].orbit}</td>
