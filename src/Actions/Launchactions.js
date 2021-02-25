@@ -18,7 +18,11 @@ export function fetchLaunches(dispatch) {
             if (response.status === 200) {
                 const pageData = paginateData(response.data, 1);
                 const totalPaginations = Math.ceil(response.data.length / 10);
-                dispatch({ type: LAUNCHES_FETCHED, payload: response.data, pageData, totalPaginations });
+                let noDataFound = false;
+                if (pageData.length == 0) {
+                    noDataFound = true;
+                }
+                dispatch({ type: LAUNCHES_FETCHED, payload: response.data, pageData, totalPaginations, noDataFound });
             }
         })
         .catch((error) => {
@@ -83,8 +87,12 @@ export function filterByLaunchStatus(value, originalData = []) {
     });
     const pageData = paginateData(newStateData, 1);
     const totalPaginations = Math.ceil(newStateData.length / 10);
+    let noDataFound = false;
+    if (pageData.length == 0) {
+        noDataFound = true;
+    }
     return function (dispatch) {
-        dispatch({ type: LAUNCH_STATUS_FILTER, newStateData, pageData, totalPaginations, launchFilter: value });
+        dispatch({ type: LAUNCH_STATUS_FILTER, newStateData, pageData, totalPaginations, launchFilter: value, noDataFound });
     }
 }
 /**
@@ -109,8 +117,12 @@ export function filterByDate(fromDate, toDate) {
  * Get successfull launch by date
  */
 export function getSuccessfullLaunches(response, pageData, totalPaginations, fromDate, toDate) {
+    let noDataFound = false;
+    if (pageData.length == 0) {
+        noDataFound = true;
+    }
     return {
-        type: LAUNCHES_FETCHED, payload: response.data, pageData, totalPaginations, fromDate, toDate
+        type: LAUNCHES_FETCHED, payload: response.data, pageData, totalPaginations, fromDate, toDate, noDataFound
     }
 }
 /**

@@ -28,8 +28,11 @@ class Grid extends Component {
                         <tr>
                             <th>No:</th>
                             <th>Launched (UTC)</th>
+                            <th>Location</th>
                             <th>Mission</th>
+                            <th>Orbit</th>
                             <th>Launch Status</th>
+                            <th>Rocket</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,15 +42,18 @@ class Grid extends Component {
                                     <tr key={index} className="grid__row-data" onClick={() => this.handleRowClick(item.flight_number)}>
                                         <td>{(item.flight_number).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false })}</td>
                                         <td>{moment.utc(item.date_utc).local().format('D MMMM YYYY, LT')}</td>
+                                        <td>{item.launch_site.site_name}</td>
                                         <td>{item.mission_name}</td>
+                                        <td>{item.rocket.second_stage.payloads[0].orbit}</td>
                                         <td>{item.upcoming === true ? <span className="new badge upcoming" data-badge-caption="Upcoming" /> : (item.launch_success === true ? <span className="new badge success" data-badge-caption="Success" /> : <span className="new badge failed" data-badge-caption="Failed" />)}</td>
+                                        <td>{item.rocket.rocket_name}</td>
                                     </tr>
                                 )
                             })
                             :
                             <tr>
                                 <td>
-                                    <Loader isOpen={true} />
+                                    {(this.props.noDataFound) ? <div>No data found...</div> : <Loader isOpen={true} />}
                                 </td>
                             </tr>
                         }
@@ -68,6 +74,7 @@ const mapStateToProps = (data) => {
         showModal: data && data.showModal,
         modalData: data && data.modalData,
         originalData: data && data.originalData,
+        noDataFound: data.noDataFound,
     };
 }
 
